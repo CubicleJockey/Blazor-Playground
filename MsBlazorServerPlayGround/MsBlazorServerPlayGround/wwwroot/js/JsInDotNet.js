@@ -7,3 +7,12 @@
         return 'Something went wrong.';
     }
 };
+
+window.CallMeInAClass = (items) => {
+    if (items) {
+        const message = items.join(', ');
+        return message;
+    } else {
+        return 'Collection was empty.';
+    }
+};
