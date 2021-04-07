@@ -1,8 +1,15 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Hosting
 @namespace MsBlazorServerPlayGround.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@inject IWebHostEnvironment HostEnvironment;
+
 @{
     Layout = null;
+
+    var currentEnvironment = HostEnvironment?.EnvironmentName ?? "(Failed to detected environment.)";
+    currentEnvironment = currentEnvironment.Contains("Production", StringComparison.CurrentCultureIgnoreCase) ? string.Empty : $"({currentEnvironment})";
 }
 
 <!DOCTYPE html>
@@ -10,11 +17,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MsBlazorServerPlayGround</title>
+    <title>MS Blazor Playground @currentEnvironment</title>
     <base href="~/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
-    <link href="MsBlazorServerPlayGround.styles.css" rel="stylesheet" />
+    <environment include="Local, Develop, QA">
+        <link href="css/site.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+    <environment include="Staging, Production">
+        <link href="css/site.min.css" rel="stylesheet" asp-append-version="true" asp-fallback-href="css/site.css" />
+    </environment>
 </head>
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
