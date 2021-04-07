@@ -44,6 +44,14 @@
         <a class="dismiss">🗙</a>
     </div>
 
+    <environment include="Local, Development, QA">
+        <script src="js/JsInDotNet.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Staging, Production">
+        <script src="js/JsInDotNet.min.js" asp-append-version="true" asp-fallback-src="js/JsInDotNet.js"></script>
+    </environment>
+
+
     <script src="_framework/blazor.server.js"></script>
 </body>
 </html>

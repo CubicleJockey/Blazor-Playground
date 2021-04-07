@@ -337,3 +337,4 @@ ASALocalRun/
 **/appsettings.json
 **/appsettings.*.json
 **/wwwroot/css/site.min.css
+**/wwwroot/js/JsInDotNet.min.js

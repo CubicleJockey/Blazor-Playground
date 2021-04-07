@@ -1,0 +1,23 @@
+﻿@page "/jsindotnet"
+
+@inject IJSRuntime JavaScript
+
+<h3>JavaScript In .Net Methods</h3>
+
+<button type="button" class="btn btn-outline-primary" @onclick="MakeTheCall">Call JavaScript from .Net</button>
+<p class="mt-2" style="font-size: 1.6em;">
+    <span class="badge badge-success">
+        @messageMarkup
+    </span>
+</p>
+
+@code {
+    private MarkupString messageMarkup = new MarkupString("Select the <strong>Call JavaScript from .NET</strong> button.");
+
+
+    private async Task MakeTheCall()
+    {
+        var messageFromJavaScript = await JavaScript.InvokeAsync<string>("CallMeInDotNet", DateTime.Now);
+        messageMarkup = new MarkupString(messageFromJavaScript);
+    }
+}

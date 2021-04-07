@@ -19,5 +19,16 @@
       "renameLocals": true
     },
     "sourceMap": true
+  },
+  {
+    "outputFileName": "wwwroot/js/JsInDotNet.min.js",
+    "inputFiles": [
+      "wwwroot/js/JsInDotNet.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
   }
 ]
