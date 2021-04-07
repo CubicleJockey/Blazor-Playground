@@ -1,0 +1,17 @@
+﻿@page "/configuration/InMemory";
+@using Microsoft.Extensions.Configuration
+
+
+@inject IConfiguration Configuration
+
+<h3>In-Memory Configurations</h3>
+<ul>
+    <li>InMemorySampleA = @Configuration["InMemorySampleA"]</li>
+    <li>InMemorySampleB = @Configuration["InMemorySampleB"]</li>
+    <li>InMemorySampleC = @Configuration["InMemorySampleC"]</li>
+</ul>
+
+
+@code {
+
+}

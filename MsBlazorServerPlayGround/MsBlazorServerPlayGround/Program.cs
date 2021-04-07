@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Generic;
 
 using static System.Console;
 
@@ -9,15 +11,29 @@ namespace MsBlazorServerPlayGround
 {
     public class Program
     {
+        private static IDictionary<string, string> inMemoryConfigurationData;
+
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            inMemoryConfigurationData = new Dictionary<string, string>
+            {
+                 { "InMemorySampleA", "A" }
+                ,{ "InMemorySampleB", "B" }
+                ,{ "InMemorySampleC", "C" }
+            };
+
+            var host = CreateHostBuilder(args).Build();
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((host, configuration) =>
                 {
+
+                    var memoryConfiguration = new MemoryConfigurationSource { InitialData = inMemoryConfigurationData };
+                    configuration.Add(memoryConfiguration);
+
                     //Added before AddUserSecrets or AzureAppConfiguration to let user secrets override environment variables
                     configuration.AddEnvironmentVariables();
 
