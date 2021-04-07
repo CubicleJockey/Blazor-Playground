@@ -20,13 +20,15 @@
     <title>MS Blazor Playground @currentEnvironment</title>
     <base href="~/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/open-iconic/font/css/open-iconic-bootstrap.min.css" />
+
     <environment include="Local, Develop, QA">
         <link href="css/site.css" rel="stylesheet" asp-append-version="true" />
     </environment>
     <environment include="Staging, Production">
         <link href="css/site.min.css" rel="stylesheet" asp-append-version="true" asp-fallback-href="css/site.css" />
     </environment>
-
+    
     <!--CSS Isolation Bundling: https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0-->
     <link href="MsBlazorServerPlayGround.styles.css" rel="stylesheet" />
 </head>

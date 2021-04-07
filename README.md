@@ -6,7 +6,7 @@
    * [.NET 6 Preview 2](https://dotnet.microsoft.com/download/dotnet/6.0)
  * [Visual Studio 2019](https://visualstudio.microsoft.com/)
 
-#### Documentation
+#### Blazor Documentation
  * [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
  * [Overview](https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-5.0)
  * [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0)
@@ -14,6 +14,7 @@
 
 #### Helpful Links
  * [Markdown Guide](https://guides.github.com/features/mastering-markdown/)
+ * [Open Iconic](https://useiconic.com)
 
 
 ### secrets.json
