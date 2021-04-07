@@ -1,0 +1,17 @@
+﻿@page "/alternative-layout"
+@layout AlternativeLayout
+
+
+@inject NavigationManager Navigator;
+
+<h3>Using Another Layout</h3>
+
+<p><button class="btn btn-primary" @onclick="GoHome">Go Home</button></p>
+
+@code {
+
+    private void GoHome()
+    {
+        Navigator.NavigateTo("/");
+    }
+}
