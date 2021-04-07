@@ -1,0 +1,93 @@
+﻿@page "/event-handling"
+@using Bogus.DataSets
+
+<h3>Event Handling</h3>
+
+<hr />
+
+<h2>Basic Event Handling (onclick)</h2>
+
+<p><label><strong>Sentence: </strong>@Sentence</label></p>
+<p><button class="btn btn-primary" @onclick="UpdateSentence">Update heading</button></p>
+
+<hr />
+
+<h2>OnChange Event Handling</h2>
+<p><label><input type="checkbox" @onchange="CheckedChanged" /> @checkedMessage</label></p>
+
+<hr />
+
+<h2>Event Handling - Event Arguments</h2>
+@for (var i = 0; i < 6; i++)
+{
+    <h5><span class="badge badge-primary"><a @onclick="GetMouseCoordinates">Click Here!</a></span></h5>
+}
+<p><code>Pointer: </code>[@coordinates]</p>
+
+<hr />
+
+<h2>Lambda Event Handler</h2>
+<p><button class="btn btn-info" @onclick="@(mouseEventArgs => changedByLambda = loremIpsum.Word())">@changedByLambda</button></p>
+
+<hr />
+
+<h2>Prevent Default Action (onkeydown)</h2>
+<p><input value="@KeyCount" @onkeydown="KeyCountHandler" @onkeydown:preventDefault /></p>
+
+<hr />
+
+<h2>Change Focus</h2>
+
+<p><input @ref="firstFocusInput" placeholder="Focus First" /></p>
+<p><input @ref="secondFocusInput" placeholder="Focus Second" /></p>
+
+<p><button class="btn btn-outline-primary" @onclick="FirstFocusChange">Focus First</button></p>
+<p><button class="btn btn-outline-secondary" @onclick="SecondFocusChange">Focus Second</button></p>
+
+<hr />
+
+@code {
+    private readonly Lorem loremIpsum = new();
+    private string Sentence { get; set; } = "The starting sentence.";
+
+    private void UpdateSentence()
+    {
+        Sentence = loremIpsum.Sentence();
+    }
+
+    private string checkedMessage;
+    private void CheckedChanged()
+    {
+        checkedMessage = $"Checked changed on [{DateTime.Now}]";
+    }
+
+    private string coordinates = "0,0";
+
+    private void GetMouseCoordinates(MouseEventArgs @event)
+    {
+        coordinates = $"{@event.ScreenX},{@event.ScreenY}";
+    }
+
+    private string changedByLambda = "Before Lambda is triggered";
+
+    private int KeyCount = 0;
+
+    private void KeyCountHandler(KeyboardEventArgs keyboardEventArgs)
+    {
+        if (keyboardEventArgs.Key == "+") { KeyCount++; return; }
+        if (keyboardEventArgs.Key == "-") { KeyCount--; return; }
+    }
+
+    private ElementReference firstFocusInput;
+    private ElementReference secondFocusInput;
+
+    private async Task FirstFocusChange()
+    {
+        await firstFocusInput.FocusAsync();
+    }
+
+    private async Task SecondFocusChange()
+    {
+        await secondFocusInput.FocusAsync();
+    }
+}
