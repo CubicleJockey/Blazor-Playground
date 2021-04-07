@@ -20,22 +20,24 @@
     <title>MS Blazor Playground @currentEnvironment</title>
     <base href="~/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    <link href="css/site.css" rel="stylesheet" />
     <environment include="Local, Develop, QA">
         <link href="css/site.css" rel="stylesheet" asp-append-version="true" />
     </environment>
     <environment include="Staging, Production">
         <link href="css/site.min.css" rel="stylesheet" asp-append-version="true" asp-fallback-href="css/site.css" />
     </environment>
+
+    <!--CSS Isolation Bundling: https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0-->
+    <link href="MsBlazorServerPlayGround.styles.css" rel="stylesheet" />
 </head>
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
 
     <div id="blazor-error-ui">
-        <environment include="Staging,Production">
+        <environment include="Qa,Staging,Production">
             An error has occurred. This application may no longer respond until reloaded.
         </environment>
-        <environment include="Development">
+        <environment include="Local,Development">
             An unhandled exception has occurred. See browser dev tools for details.
         </environment>
         <a href="" class="reload">Reload</a>

@@ -336,3 +336,4 @@ ASALocalRun/
 
 **/appsettings.json
 **/appsettings.*.json
+**/wwwroot/css/site.min.css

@@ -22,7 +22,7 @@ namespace MsBlazorServerPlayGround
                     configuration.AddEnvironmentVariables();
 
                     var environment = host.HostingEnvironment;
-                    if (environment.IsEnvironment("Local"))
+                    if (environment.IsEnvironment("Local") || environment.IsDevelopment())
                     {
                         configuration.AddUserSecrets<Program>();
                     }
