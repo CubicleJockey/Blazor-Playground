@@ -32,7 +32,10 @@
 <hr />
 
 <h2>Prevent Default Action (onkeydown)</h2>
-<p><input value="@KeyCount" @onkeydown="KeyCountHandler" @onkeydown:preventDefault /></p>
+<p>
+    <label>&plusmn; keys only: </label>
+    <input value="@KeyCount" @onkeydown="KeyCountHandler" @onkeydown:preventDefault/>
+</p>
 
 <hr />
 
