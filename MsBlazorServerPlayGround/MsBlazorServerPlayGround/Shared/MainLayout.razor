@@ -16,10 +16,21 @@
                 @Body
             </div>
         </CascadingValue>
+        
+        <ChildBind @bind-LottoNumber="LottoNumber" @bind-LottoNumber:event="UpdateLottoNumber"></ChildBind>
     </div>
 </div>
 
 @code
 {
+    private static readonly Random random = new();
+
     private readonly MainTheme Theme = new() { ButtonClass = "btn-outline-primary" };
+
+    private string LottoNumber { get; set; } = "03-10-11-12-34-46";
+
+    private void UpdateLottoNumber()
+    {
+        LottoNumber = $"{random.Next(0,9)}{random.Next(0, 9)}-{random.Next(0, 9)}{random.Next(0, 9)}-{random.Next(0, 9)}{random.Next(0, 9)}-{random.Next(0, 9)}{random.Next(0, 9)}-{random.Next(0, 9)}{random.Next(0, 9)}-{random.Next(0, 9)}{random.Next(0, 9)}-{random.Next(0, 9)}{random.Next(0, 9)}";
+    }
 }

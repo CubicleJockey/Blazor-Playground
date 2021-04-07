@@ -1,0 +1,82 @@
+﻿@page "/data-binding"
+@using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
+
+<h3>Data Binding</h3>
+
+<hr />
+
+<h2>Binding to Field &amp; Property</h2>
+<p>Field Binding: <input @bind="textInputField" /></p>
+<p>Property Binding: <input @bind="TextInputProperty" /></p>
+<ul>
+    <li><code>@nameof(textInputField)</code>: @textInputField</li>
+    <li><code>@nameof(TextInputProperty)</code>: @TextInputProperty</li>
+</ul>
+
+<hr />
+
+<h2>Bind Event</h2>
+
+<p><input @bind="BindEventInput" @bind:event="oninput" /></p>
+<p><code>@nameof(BindEventInput) Event:[oninput]</code>: @BindEventInput</p>
+
+<hr />
+<h2>Unparsable values</h2>
+<p><input @bind="Unparsable" /></p>
+<p><code>@nameof(Unparsable)</code>: @Unparsable</p>
+
+<hr />
+<h2>Input Format</h2>
+<p>
+    <label>
+        <code>yyyy-MM-dd</code> format:
+        <input @bind="startDate" @bind:format="yyyy-MM-dd" />
+    </label>
+</p>
+
+<p><code>startDate</code>: @startDate</p>
+
+<hr />
+
+<h2>Custom Binding Format</h2>
+<p>
+    <label>
+         Number (&plusmn;0.000 format):
+        <input @bind="Number" />
+    </label>
+</p>
+
+<p><code>decimalValue</code>: @number</p>
+
+<hr />
+
+
+<hr/>
+
+@code {
+    private string textInputField;
+    private string TextInputProperty { get; set; }
+    private string BindEventInput { get; set; }
+    private int Unparsable = 12345;
+    private DateTime startDate = DateTime.Now;
+
+    private decimal number = 42.5M;
+    private string Number
+    {
+        get => number.ToString("0.000");
+        set
+        {
+            if (decimal.TryParse(value, out var num))
+            {
+                number = Math.Round(num, 3);
+            }
+        }
+    }
+
+    //Parent Parameter Lives on MainLayout
+    //[Parameter]
+    //public string LottoNumber { get; set; }
+
+    //[Parameter]
+    //public EventCallback<string> Lotto
+}
