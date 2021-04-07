@@ -1,10 +1,11 @@
 ﻿@page "/jsindotnetclass"
+@using MsBlazorServerPlayGround.UIThemes
 
 @inject JsInAClass jsInAClass;
 
 <h3>JavaScript In .Net Class Methods</h3>
 
-<button type="button" class="btn btn-outline-primary" @onclick="MakeTheCall">Call JavaScript from .Net Class</button>
+<button type="button" class="btn @Theme.ButtonClass" @onclick="MakeTheCall">Call JavaScript from .Net Class</button>
 <p class="mt-2" style="font-size: 1.6em;">
     <span class="badge badge-success">
         @messageMarkup
@@ -12,6 +13,10 @@
 </p>
 
 @code {
+    [CascadingParameter]
+    protected MainTheme Theme { get; set; }
+
+
     private MarkupString messageMarkup = new MarkupString("Select the <strong>Call JavaScript from .NET Class</strong> button.");
 
     private async Task MakeTheCall()
