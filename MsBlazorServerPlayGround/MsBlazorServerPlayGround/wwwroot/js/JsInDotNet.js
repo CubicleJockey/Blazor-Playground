@@ -10,8 +10,15 @@
 
 window.CallMeInAClass = (items) => {
     if (items) {
-        const message = items.join(', ');
-        return message;
+        const message = [];
+
+        message.push(`Unsorted: ${items.join(',')}`);
+
+        items.sort();
+        message.push(`Sorted: ${items.join(',')}`);
+
+
+        return message.join('<br/>');
     } else {
         return 'Collection was empty.';
     }
