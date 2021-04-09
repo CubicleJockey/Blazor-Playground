@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Objects\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Data\FileUpload\LoremIpsum.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

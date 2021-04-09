@@ -1,0 +1,36 @@
+﻿@page "/JsAndDotNet/dotnet-in-javascript"
+@using Bogus.DataSets
+
+
+<h3>DotNet In JavaScript</h3>
+
+<div>
+    <p>JSInvoke Method   
+        <button class="btn btn-primary" onclick="window.dotnetInJs.getIntegers()">Activate</button>
+    </p>
+    <p id="integers"></p>
+</div>
+<div>
+    <p>JSInvoke Method w/ calling alias
+        <button class="btn btn-primary" onclick="window.dotnetInJs.getSentenceAlias()">Activate</button>
+    </p>
+    <p id="sentence-csharp-alias"></p>
+</div>
+
+
+@code {
+    private static readonly Random random = new();
+    private static readonly Lorem loremIpsum = new();
+
+    [JSInvokable]
+    public static Task<IEnumerable<int>> GetListOfIntegers()
+    {
+        return Task.FromResult(Enumerable.Range(0, random.Next(50)));
+    }
+
+    [JSInvokable("GimmeASentence")]
+    public static Task<string> GetSentence()
+    {
+        return Task.FromResult(loremIpsum.Sentence());
+    }
+}

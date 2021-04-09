@@ -6,6 +6,7 @@
 
 <p><button class="btn btn-primary navigation-btn" @onclick="NavigateToJsInDotNet">Js In DotNet</button></p>
 <p><button class="btn btn-primary navigation-btn" @onclick="NavigateToJsInDotNetClass">Js In DotNet Class</button></p>
+<p><button class="btn btn-primary navigation-btn" @onclick="NavigateToDotNetInJs">DotNet In Js</button></p>
 
 
 @code {
@@ -18,5 +19,10 @@
     private void NavigateToJsInDotNetClass()
     {
         Navigator.NavigateTo("/JsAndDotNet/jsindotnetclass");
+    }
+
+    private void NavigateToDotNetInJs()
+    {
+        Navigator.NavigateTo("/JsAndDotNet/dotnet-in-javascript");
     }
 }
