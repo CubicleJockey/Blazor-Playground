@@ -1,0 +1,67 @@
+﻿@page "/FileUpload/basic-upload"
+@using System.IO
+
+<h3>Basic Upload</h3>
+
+<div id="UploadContainer">
+    <p><label>Max file size: <input type="number" @bind="maxFileSize" /></label></p>
+    <p><label>Max allowed files: <input type="number" @bind="maxAllowedFiles"/></label></p>
+    <p><label>Upload up to @maxAllowedFiles files of up to @maxFileSize bytes each: <InputFile OnChange="@LoadFiles" multiple/></label></p>
+</div>
+
+<div id="UploadLoadingContainer" style="display: @(string.IsNullOrWhiteSpace(error) ? "block" : "none");">
+    @if (isLoading) { <p>Loading...</p> }
+
+    <h6>Files to be uploaded.</h6>
+    <ul>
+        @foreach (var(file, content) in loadedFiles)
+        {
+            <li>
+                <ul class="no-bullets">
+                    <li class="list-item"><strong>Name:</strong> <code>@file.Name</code></li>
+                    <li class="list-item"><strong>Last Modified:</strong> <code>@file.LastModified.ToString()</code></li>
+                    <li class="list-item"><strong>Size (bytes):</strong> <code>@file.Size</code></li>
+                    <li class="list-item"><strong>Content type:</strong> <code>@file.ContentType</code></li>
+                    <li class="list-item"><strong>Content:</strong> @content</li>
+                </ul>
+            </li>
+        }
+    </ul>
+</div>
+
+<div style="display: @(string.IsNullOrWhiteSpace(error) ? "none" : "block"); margin-top: 10px;">
+    <p><code>Error encountered:</code></p>
+    <p>@error</p>
+</div>
+
+@code {
+    private long maxFileSize = 1024 * 15;
+    private int maxAllowedFiles = 3;
+    private bool isLoading;
+    private string error;
+
+    private readonly IDictionary<IBrowserFile, string> loadedFiles = new Dictionary<IBrowserFile, string>();
+
+    private async Task LoadFiles(InputFileChangeEventArgs fileEvents)
+    {
+        isLoading = true;
+        loadedFiles.Clear();
+        error = string.Empty;
+
+        try
+        {
+            foreach (var file in fileEvents.GetMultipleFiles(maxAllowedFiles))
+            {
+                using var reader = new StreamReader(file.OpenReadStream(maxFileSize));
+
+                loadedFiles.Add(file, await reader.ReadToEndAsync());
+            }
+        }
+        catch (Exception exception)
+        {
+            error = exception.Message;
+        }
+
+        isLoading = false;
+    }
+}

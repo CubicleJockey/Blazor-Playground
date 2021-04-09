@@ -1,0 +1,13 @@
+﻿@page "/FileUpload/index"
+
+@inject NavigationManager Navigator
+
+<h3>File Upload Examples</h3>
+<p><button class="btn btn-outline-info" @onclick="NavigateToBasicUpload">Basic File Upload Example</button></p>
+@code {
+
+    private void NavigateToBasicUpload()
+    {
+        Navigator.NavigateTo("/FileUpload/basic-upload");
+    }
+}

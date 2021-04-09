@@ -16,4 +16,13 @@
     <Folder Include="Objects\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\FileUpload\LoremIpsum.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\FileUpload\Simple.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

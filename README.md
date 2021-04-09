@@ -11,6 +11,7 @@
  * [Overview](https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-5.0)
  * [CSS Isolation](https://docs.microsoft.com/en-us/aspnet/core/blazor/components/css-isolation?view=aspnetcore-5.0)
  * [Call JavaScript from .NET Methods](https://docs.microsoft.com/en-us/aspnet/core/blazor/call-javascript-from-dotnet?view=aspnetcore-5.0)
+ * [File Upload Best Practices](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-5.0#security-considerations)
 
 #### Helpful Links
  * [Markdown Guide](https://guides.github.com/features/mastering-markdown/)
