@@ -11,6 +11,27 @@
     <li>InMemorySampleC = @Configuration["InMemorySampleC"]</li>
 </ul>
 
+<p>
+<strong>Program.cs</strong>
+<code style="display:block; white-space:pre-wrap">
+public static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .ConfigureAppConfiguration((host, configuration) =>
+        {
+            IDictionary&lt;string,string&gt; inMemoryConfigurationData = new Dictionary&lt;string, string&gt;
+            {
+                { "InMemorySampleA", "A" }
+                ,{ "InMemorySampleB", "B" }
+                ,{ "InMemorySampleC", "C" }
+            };
+
+            var memoryConfiguration = new MemoryConfigurationSource { InitialData = inMemoryConfigurationData };
+            configuration.Add(memoryConfiguration);
+
+            ...
+        }
+</code>
+</p>
 
 @code {
 

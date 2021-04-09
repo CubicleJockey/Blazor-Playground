@@ -1,0 +1,26 @@
+﻿@page "/BuiltInSamples/index"
+
+@inject NavigationManager Navigator
+
+<h3>Built In Samples</h3>
+<ul>
+    <li class="list-item">
+        <button class="btn btn-primary" @onclick="NavigateToCounter">Counter</button>
+    </li>
+    <li class="list-item">
+        <button class="btn btn-primary" @onclick="NavigateToFetchData">Fetch Data</button>
+    </li>
+</ul>
+
+@code {
+
+    private void NavigateToCounter()
+    {
+        Navigator.NavigateTo("BuiltInSamples/counter");
+    }
+
+    private void NavigateToFetchData()
+    {
+        Navigator.NavigateTo("BuiltInSamples/fetchData");
+    }
+}

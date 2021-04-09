@@ -1,0 +1,27 @@
+﻿@page "/JsInDotNet/index"
+
+@inject NavigationManager Navigator
+
+<h3>JavaScript In DotNet Samples</h3>
+<ul>
+    <li class="list-item">
+        <button class="btn btn-primary" @onclick="NavigateToJsInDotNet">Js In DotNet</button>
+    </li>
+    <li class="list-item">
+        <button class="btn btn-primary" @onclick="NavigateToJsInDotNetClass">Js In DotNet Class</button>
+    </li>
+</ul>
+
+
+@code {
+
+    private void NavigateToJsInDotNet()
+    {
+        Navigator.NavigateTo("/JsInDotNet/jsindotnet");
+    }
+
+    private void NavigateToJsInDotNetClass()
+    {
+        Navigator.NavigateTo("/JsInDotNet/jsindotnetclass");
+    }
+}
