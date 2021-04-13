@@ -1,0 +1,28 @@
+﻿@page "/Virtualization/index"
+
+@inject NavigationManager Navigator
+
+<h3>Virtualization Examples (Rendering)</h3>
+
+<p style="width: 30%;">
+    Improve the perceived performance of component rendering using the Blazor framework's built-in virtualization support with 
+    the Virtualize component. Virtualization is a technique for limiting UI rendering to just the <code>parts that are currently visible</code>. 
+    For example, virtualization is helpful when the app must render a long list of items and only a subset of items is required to be visible at any given time.
+</p>
+
+<p><button class="btn btn-primary" @onclick="NavigateToNoneVirtualized">None Virtualized</button></p>
+<p><button class="btn btn-primary" @onclick="NavigateToVirtualized">Virtualized</button></p>
+
+
+@code {
+
+    private void NavigateToNoneVirtualized()
+    {
+        Navigator.NavigateTo("/Virtualization/none-virtualized");
+    }
+
+    private void NavigateToVirtualized()
+    {
+        Navigator.NavigateTo("/Virtualization/virtualized");
+    }
+}
