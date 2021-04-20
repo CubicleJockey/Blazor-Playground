@@ -1,0 +1,31 @@
+﻿@page "/StateManagement/index"
+
+@inject NavigationManager Navigator
+
+<h3>State Management Examples</h3>
+
+<p>
+    <code>Documentation:</code><a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/state-management?view=aspnetcore-5.0&pivots=webassembly">Here.</a>
+</p>
+
+<p><button class="btn btn-primary" @onclick="NavigateToLocalStorage">Local Storage</button></p>
+<p><button class="btn btn-primary" @onclick="NavigateToSessionStorage">Session Storage</button></p>
+<p><button class="btn btn-primary" @onclick="NavigateToServerSideStorage">Server Side Storage</button></p>
+
+@code {
+
+    private void NavigateToLocalStorage()
+    {
+        Navigator.NavigateTo("/StateManagement/local-storage");
+    }
+
+    private void NavigateToSessionStorage()
+    {
+        Navigator.NavigateTo("/StateManagement/session-storage");
+    }
+
+    private void NavigateToServerSideStorage()
+    {
+        Navigator.NavigateTo("/StateManagement/server-side-storage");
+    }
+}
