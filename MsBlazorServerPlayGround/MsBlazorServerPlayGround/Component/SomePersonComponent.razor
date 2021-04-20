@@ -1,0 +1,15 @@
+﻿@using MsBlazorServerPlayGround.Models
+
+<div class="card custom-card-magin" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Person.FirstName, @Person.LastName</h5>
+        <p class="card-text">@Person.Bio</p>
+        <a href="javascript:void(0)" class="btn btn-primary">Submit Id: @Person.Id</a>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public SomePerson Person { get; set; }
+}

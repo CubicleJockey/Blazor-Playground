@@ -10,19 +10,43 @@
     For example, virtualization is helpful when the app must render a long list of items and only a subset of items is required to be visible at any given time.
 </p>
 
+<p>
+    Non-Virtualize will error for huge amounts but not for virtualization: 
+    <select @onchange="OnGenerateAmountChange">
+        @foreach (var amount in generateAmounts)
+        {
+            <option value="@amount">@amount</option>
+        }
+    </select>
+</p>
+
+
 <p><button class="btn btn-primary" @onclick="NavigateToNoneVirtualized">None Virtualized</button></p>
 <p><button class="btn btn-primary" @onclick="NavigateToVirtualized">Virtualized</button></p>
 
 
 @code {
 
+    private readonly IEnumerable<int> generateAmounts = new [] {100000, 10000, 1000, 100 };
+    private int amountToGenerate = 100000;
+
     private void NavigateToNoneVirtualized()
     {
-        Navigator.NavigateTo("/Virtualization/none-virtualized");
+        Navigator.NavigateTo($"/Virtualization/none-virtualized/{amountToGenerate}");
     }
 
     private void NavigateToVirtualized()
     {
-        Navigator.NavigateTo("/Virtualization/virtualized");
+        Navigator.NavigateTo($"/Virtualization/virtualized/{amountToGenerate}");
+    }
+
+    private void OnGenerateAmountChange(ChangeEventArgs changeEventArgs)
+    {
+        if (changeEventArgs.Value == default) { return; 
+        }
+        if (int.TryParse(changeEventArgs.Value.ToString(), out var amount))
+        {
+            amountToGenerate = amount;
+        }
     }
 }
