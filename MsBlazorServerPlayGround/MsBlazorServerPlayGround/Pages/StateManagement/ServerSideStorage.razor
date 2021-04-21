@@ -1,7 +1,79 @@
 ﻿@page "/StateManagement/server-side-storage"
+@using MsBlazorServerPlayGround.Data
+@using Bogus.DataSets
+
+@inject StateManager StateManager
+@implements IDisposable
 
 <h3>Server Side Storage</h3>
+<p>After setting a <code>key</code>, <kdb>navigate away</kdb> and come back to page to see state retained.</p>
+
+<label>
+    Selected Key:
+    <select @onchange="@OnKeyChange">
+        @foreach (var key in keys)
+        {
+            <option value="@key">@key</option>
+        }
+    </select>
+</label>
+<br/>
+
+<p><button @onclick="UpdateStateForKey">Update [@selectedKey] value;</button></p>
+<p><code>@keys[0]</code> @(StateManager.GetState<string>(keys[0]) ?? $"No Values in State Manager for key {keys[0]}")</p>
+<p><code>@keys[1]</code> @(StateManager.GetState<string>(keys[1]) ?? $"No Values in State Manager for key {keys[1]}")</p>
+
+<div>
+    <code>Update Message:</code>
+    <ul style="list-style-type: none;">
+        @foreach (var message in messages)
+        {
+            <li>@message</li>
+        }
+    </ul>
+</div>
 
 @code {
+    private Lorem loremIpsum;
+    private IList<string> keys;
 
+    protected string selectedKey;
+    protected ICollection<MarkupString> messages;
+
+
+    protected override void OnInitialized()
+    {
+        loremIpsum = new();
+        keys = new[] {"Key1", "Key2"};
+
+        selectedKey = keys.First();
+
+        messages = new List<MarkupString>();
+
+        StateManager.OnChange += SomethingChanged;
+    }
+    
+    public void Dispose()
+    {
+        StateManager.OnChange -= SomethingChanged;
+    }
+
+    #region Helper Methods
+
+    private void SomethingChanged()
+    {
+        messages.Add(new MarkupString($"<strong>{selectedKey}</strong>: was updated last {DateTime.Now}"));
+    }
+
+    private void UpdateStateForKey()
+    {
+        StateManager.SetState(selectedKey, string.Join(",",loremIpsum.Words()));
+    }
+
+    private void OnKeyChange(ChangeEventArgs changeEvent)
+    {
+        selectedKey = changeEvent.Value as string ?? keys.First();
+    }
+
+    #endregion Helper Methods
 }

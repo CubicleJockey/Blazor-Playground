@@ -27,6 +27,8 @@ namespace MsBlazorServerPlayGround
             services.AddSingleton<WeatherForecastService>();
 
             services.AddTransient<JsInAClass>();
+
+            services.AddScoped<StateManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
