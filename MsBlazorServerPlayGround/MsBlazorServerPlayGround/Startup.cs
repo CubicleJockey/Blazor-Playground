@@ -23,7 +23,10 @@ namespace MsBlazorServerPlayGround
         {
             services.AddRazorPages()
                     .AddRazorRuntimeCompilation();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor()
+                    .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024); //Increases message max for interop C# called from JavaScript
+
+
             services.AddSingleton<WeatherForecastService>();
 
             services.AddTransient<JsInAClass>();
