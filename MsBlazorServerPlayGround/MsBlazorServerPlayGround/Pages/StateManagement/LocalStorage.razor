@@ -11,10 +11,8 @@
 <p>
     <code>Current Value:</code> @(new MarkupString(StoredValue))
 </p>
-<p>
-    <button class="btn btn-primary" @onclick="AddToStorageAsync">Add/Update Item To Local Storage</button>
-    <button class="btn btn-primary" @onclick="RemoveFromStorageAsync">Remove Item From Local Storage</button>
-</p>
+<p><button class="btn btn-primary" @onclick="AddToStorageAsync">Add/Update Item To Local Storage</button></p>
+<p><button class="btn btn-primary" @onclick="RemoveFromStorageAsync">Remove Item From Local Storage</button></p>
 
 @code {
     private const string KEY = "local-storage-sample";

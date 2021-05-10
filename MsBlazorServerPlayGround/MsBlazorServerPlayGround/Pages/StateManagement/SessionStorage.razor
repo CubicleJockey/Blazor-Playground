@@ -1,12 +1,49 @@
 ﻿@page "/StateManagement/session-storage"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+
+@inject ProtectedSessionStorage ProtectedSessionStorage
 
 <h3>Session Storage</h3>
 <p>
-    <code>sessionStorage</code> is scoped to the browser tab. If the user reloads the tab, the state persists. 
-    If the user closes the tab or the browser, the state is lost. If the user opens multiple browser tabs, 
+    <code>sessionStorage</code> is scoped to the browser tab. If the user reloads the tab, the state persists.
+    If the user closes the tab or the browser, the state is lost. If the user opens multiple browser tabs,
     each tab has its own independent version of the data.
 </p>
 
-@code {
+<p>
+    <code>Current Value:</code> @(new MarkupString(StoredValue))
+</p>
+<p><button class="btn btn-primary" @onclick="AddToStorageAsync">Add/Update Item To Local Storage</button></p>
+<p><button class="btn btn-primary" @onclick="RemoveFromStorageAsync">Remove Item From Local Storage</button></p>
 
+
+@code {
+    private const string KEY = "session-storage-sample";
+
+    public string StoredValue { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetLocalStorageValue();
+    }
+
+    private async Task GetLocalStorageValue()
+    {
+        var storedValue = await ProtectedSessionStorage.GetAsync<string>(KEY);
+
+        StoredValue = storedValue.Success ? storedValue.Value : $"Local storage key <strong>[{KEY}]</strong> does not contain a value yet.";
+    }
+
+    private async Task AddToStorageAsync()
+    {
+        await ProtectedSessionStorage.SetAsync(KEY, $"Item added on {DateTime.Now}");
+        await GetLocalStorageValue();
+    }
+
+    private async Task RemoveFromStorageAsync()
+    {
+        await ProtectedSessionStorage.DeleteAsync(KEY);
+        await GetLocalStorageValue();
+    }
 }
