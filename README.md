@@ -14,8 +14,10 @@
  * [File Upload Best Practices](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-5.0#security-considerations)
 
 #### Blazor Testing Documentation
- * [bUnit](https://github.com/bUnit-dev/bUnit)
+ * [bUnit - GitHub](https://github.com/bUnit-dev/bUnit)
    * There's no official Microsoft testing framework for Blazor, but the community-driven project bUnit provides a convenient way to unit test Blazor components.
+ * [bUnit Project Page](https://bunit.dev/)
+   * [Documentation](https://bunit.dev/docs/getting-started/index.html)
 
 #### Helpful Links
  * [Markdown Guide](https://guides.github.com/features/mastering-markdown/)
