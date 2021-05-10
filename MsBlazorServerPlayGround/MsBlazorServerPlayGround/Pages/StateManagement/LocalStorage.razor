@@ -1,6 +1,7 @@
 ﻿@page "/StateManagement/local-storage"
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
+@inject NavigationManager NavigationManager 
 @inject ProtectedLocalStorage ProtectedLocalStorage
 
 <h3>Local Storage</h3>
@@ -13,6 +14,7 @@
 </p>
 <p><button class="btn btn-primary" @onclick="AddToStorageAsync">Add/Update Item To Local Storage</button></p>
 <p><button class="btn btn-primary" @onclick="RemoveFromStorageAsync">Remove Item From Local Storage</button></p>
+<p><button class="btn btn-outline-primary" @onclick="NavigateToStateManagementIndex">&lt; Back</button></p>
 
 @code {
     private const string KEY = "local-storage-sample";
@@ -42,6 +44,11 @@
     {
         await ProtectedLocalStorage.DeleteAsync(KEY);
         await GetLocalStorageValue();
+    }
+
+    private void NavigateToStateManagementIndex()
+    {
+        NavigationManager.NavigateTo("/StateManagement/Index");
     }
 
 }

@@ -2,6 +2,7 @@
 @using MsBlazorServerPlayGround.Data
 @using Bogus.DataSets
 
+@inject NavigationManager NavigationManager
 @inject StateManager StateManager
 @implements IDisposable
 
@@ -33,6 +34,8 @@
     </ul>
 </div>
 
+<p><button class="btn btn-outline-primary" @onclick="NavigateToStateManagementIndex">&lt; Back</button></p>
+
 @code {
     private Lorem loremIpsum;
     private IList<string> keys;
@@ -52,7 +55,7 @@
 
         StateManager.OnChange += SomethingChanged;
     }
-    
+
     public void Dispose()
     {
         StateManager.OnChange -= SomethingChanged;
@@ -73,6 +76,12 @@
     private void OnKeyChange(ChangeEventArgs changeEvent)
     {
         selectedKey = changeEvent.Value as string ?? keys.First();
+    }
+
+
+    private void NavigateToStateManagementIndex()
+    {
+        NavigationManager.NavigateTo("/StateManagement/Index");
     }
 
     #endregion Helper Methods
