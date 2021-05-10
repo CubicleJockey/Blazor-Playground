@@ -1,11 +1,49 @@
 ﻿@page "/StateManagement/local-storage"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+
+@inject ProtectedLocalStorage ProtectedLocalStorage
 
 <h3>Local Storage</h3>
 <p>
     <code>localStorage</code> is scoped to the browser's window. If the user reloads the page or closes and re-opens the browser, the state persists. 
     If the user opens multiple browser tabs, the state is shared across the tabs. Data persists in localStorage until explicitly cleared.
 </p>
+<p>
+    <code>Current Value:</code> @(new MarkupString(StoredValue))
+</p>
+<p>
+    <button class="btn btn-primary" @onclick="AddToStorageAsync">Add/Update Item To Local Storage</button>
+    <button class="btn btn-primary" @onclick="RemoveFromStorageAsync">Remove Item From Local Storage</button>
+</p>
 
 @code {
-    
+    private const string KEY = "local-storage-sample";
+
+    public string StoredValue { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetLocalStorageValue();
+    }
+
+    private async Task GetLocalStorageValue()
+    {
+        var storedValue = await ProtectedLocalStorage.GetAsync<string>(KEY);
+
+        StoredValue = storedValue.Success ? storedValue.Value : $"Local storage key <strong>[{KEY}]</strong> does not contain a value yet.";
+    }
+
+    private async Task AddToStorageAsync()
+    {
+        await ProtectedLocalStorage.SetAsync(KEY, $"Item added on {DateTime.Now}");
+        await GetLocalStorageValue();
+    }
+
+    private async Task RemoveFromStorageAsync()
+    {
+        await ProtectedLocalStorage.DeleteAsync(KEY);
+        await GetLocalStorageValue();
+    }
+
 }

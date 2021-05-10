@@ -5,6 +5,9 @@ using Microsoft.JSInterop;
 
 namespace MsBlazorServerPlayGround.Objects
 {
+    /// <summary>
+    /// CallMeInAClass JavaScript method is found in ~/wwwroot/js/JsInDotNet.js
+    /// </summary>
     public class JsInAClass
     {
         private static readonly Random random = new();
