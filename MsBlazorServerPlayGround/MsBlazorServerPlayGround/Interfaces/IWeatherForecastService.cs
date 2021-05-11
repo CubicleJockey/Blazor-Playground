@@ -1,7 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using MsBlazorServerPlayGround.Data;
 
-namespace MsBlazorServerPlayGround.Data
+namespace MsBlazorServerPlayGround.Interfaces
 {
     public interface IWeatherForecastService
     {

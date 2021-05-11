@@ -10,6 +10,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using MsBlazorServerPlayGround.Interfaces;
 using TestContext = Bunit.TestContext;
 
 namespace MSBlazorServerPlayground.Tests.Pages.BuiltInSamples
@@ -63,12 +64,15 @@ namespace MSBlazorServerPlayground.Tests.Pages.BuiltInSamples
         {
             //Arrange
             var NOW = DateTime.Now;
-            var values = new []{ new WeatherForecast
+            var values = new[]
             {
-                Date = NOW,
-                Summary = "A Summary",
-                TemperatureC = 100,
-                } };
+                new WeatherForecast
+                {
+                    Date = NOW,
+                    Summary = "A Summary",
+                    TemperatureC = 100,
+                }
+            };
 
             A.CallTo(serviceExpression).ReturnsLazily(() => values);
 
