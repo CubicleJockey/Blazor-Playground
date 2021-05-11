@@ -1,28 +1,31 @@
 ﻿@page "/BuiltInSamples/fetchdata"
 
 @using MsBlazorServerPlayGround.Data
-@inject WeatherForecastService ForecastService
+@inject IWeatherForecastService ForecastService
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (ForecastService != default)
 {
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
+
+    if (forecasts == null)
+    {
+        <p id="loading-forecast"><em>Loading...</em></p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
             <tr>
                 <th>Date</th>
                 <th>Temp. (C)</th>
                 <th>Temp. (F)</th>
                 <th>Summary</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             @foreach (var forecast in forecasts)
             {
                 <tr>
@@ -32,8 +35,13 @@ else
                     <td>@forecast.Summary</td>
                 </tr>
             }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    <p id="dependency-injection-failure">Weather Forecast Service is down, try again later.</p>
 }
 
 @code {
@@ -41,6 +49,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        if (ForecastService != default)
+        {
+            forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        }
     }
 }

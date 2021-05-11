@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MsBlazorServerPlayGround.Data
 {
-    public class WeatherForecastService
+    public class WeatherForecastService : IWeatherForecastService
     {
         private static readonly string[] Summaries =
         {

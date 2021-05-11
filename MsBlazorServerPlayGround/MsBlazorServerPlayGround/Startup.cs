@@ -27,7 +27,7 @@ namespace MsBlazorServerPlayGround
                     .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024); //Increases message max for interop C# called from JavaScript
 
 
-            services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<IWeatherForecastService, WeatherForecastService>();
 
             services.AddTransient<JsInAClass>();
 
