@@ -6,7 +6,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MsBlazorServerPlayGround.Data;
 using MsBlazorServerPlayGround.Pages.BuiltInSamples;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
 using TestContext = Bunit.TestContext;
 
@@ -60,12 +62,13 @@ namespace MSBlazorServerPlayground.Tests.Pages.BuiltInSamples
         public void WeatherForecastServiceIsValid()
         {
             //Arrange
-            var values = new WeatherForecast[]{ new WeatherForecast
+            var NOW = DateTime.Now;
+            var values = new []{ new WeatherForecast
             {
-                Date = DateTime.Now,
+                Date = NOW,
                 Summary = "A Summary",
-                TemperatureC = 100
-            } };
+                TemperatureC = 100,
+                } };
 
             A.CallTo(serviceExpression).ReturnsLazily(() => values);
 
@@ -80,6 +83,23 @@ namespace MSBlazorServerPlayground.Tests.Pages.BuiltInSamples
             var table = component.Find(".table");
             var innerTable = table.TextContent;
             innerTable.Should().NotBeNullOrWhiteSpace();
+
+
+            var rows = component.FindAll("table tbody tr");
+            rows.Count.Should().Be(1);
+
+            var row = rows.Single();
+
+
+            var expected = new StringBuilder();
+            expected.AppendLine("<tr>");
+            expected.AppendLine($"<td>{NOW.ToShortDateString()}</td>");
+            expected.AppendLine("<td>100</td>");
+            expected.AppendLine("<td>212</td>");
+            expected.AppendLine("<td>A Summary</td>");
+            expected.AppendLine("</tr>");
+
+            row.MarkupMatches(expected.ToString());
 
             A.CallTo(serviceExpression).MustHaveHappenedOnceExactly();
         }
