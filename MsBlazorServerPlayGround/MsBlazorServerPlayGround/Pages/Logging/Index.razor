@@ -1,0 +1,23 @@
+﻿@page "/Logging/Index"
+
+@inject NavigationManager NavigationManager
+
+<h3>Logging Examples</h3>
+
+
+<p><button class="btn btn-primary" @onclick="NavigateToLogger">Inject Logger</button></p>
+<p><button class="btn btn-primary" @onclick="NavigateToLoggerFactory">Inject Logger Factory</button></p>
+
+@code {
+
+    private void NavigateToLogger()
+    {
+        NavigationManager.NavigateTo("/Logging/inject-logger");
+    }
+
+    private void NavigateToLoggerFactory()
+    {
+        NavigationManager.NavigateTo("/Logging/inject-loggerfactory");
+    }
+
+}

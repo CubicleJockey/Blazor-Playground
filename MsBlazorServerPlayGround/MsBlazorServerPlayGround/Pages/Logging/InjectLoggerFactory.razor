@@ -1,0 +1,45 @@
+﻿@page "/Logging/inject-loggerfactory"
+
+@using Bogus.DataSets
+@using Microsoft.Extensions.Logging
+
+@inject ILoggerFactory LoggerFactory
+
+<h3>Inject Logger Factory</h3>
+<p><strong>Dependency Injected:</strong> <code>@@inject LoggerFactory LoggerFactory</code></p>
+
+<p><button class="btn btn-secondary" @onclick="LogSomething">Trigger Logging</button></p>
+
+<p><code>Information Logged:</code>@InfoMessage</p>
+<p><code>Warning Logged:</code>@WarningMessage</p>
+<p><code>Error Logged:</code>@ErrorMessage</p>
+
+@code {
+    public string InfoMessage { get; set; }
+    public string WarningMessage { get; set; }
+    public string ErrorMessage { get; set; }
+
+    private Lorem lorem;
+
+    protected override Task OnInitializedAsync()
+    {
+        lorem = new();
+
+        return base.OnInitializedAsync();
+    }
+
+
+    private void LogSomething()
+    {
+        InfoMessage = lorem.Sentence();
+        WarningMessage = lorem.Sentence();
+        ErrorMessage = lorem.Sentence();
+
+
+        var logger = LoggerFactory.CreateLogger<InjectLoggerFactory>();
+
+        logger.LogInformation(InfoMessage);
+        logger.LogWarning(WarningMessage);
+        logger.LogError(ErrorMessage);
+    }
+}
