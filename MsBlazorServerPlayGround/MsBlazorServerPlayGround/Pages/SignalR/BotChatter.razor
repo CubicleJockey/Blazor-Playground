@@ -13,6 +13,11 @@
 <h3>The Bot Chatter (Blazor)</h3>
 
 <p>
+    Press <code>Open Additional Chat Window</code> button and put the new tab/window side by side with the original window.
+    <code>Send Auto Chat</code> will simulate chat between both screens.
+</p>
+
+<p>
     <button class="btn btn-outline-secondary" @onclick="Send" disabled="@(!IsConnected)">Send Auto Chat</button>
     <button class="btn btn-outline-secondary" @onclick="ClearMessage">Clear Messages</button>
 </p>
