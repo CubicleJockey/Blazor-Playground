@@ -1,0 +1,18 @@
+﻿@page "/SignalR/Index"
+
+@inject NavigationManager NavigationManager
+
+<h3>Signal R Examples</h3>
+<hr />
+<br/>
+<p><button class="btn btn-primary" @onclick="NavigateToBlazorSignalR">SignalR with Blazor</button></p>
+
+
+@code {
+
+    private void NavigateToBlazorSignalR()
+    {
+        NavigationManager.NavigateTo("/SignalR/BotChatter");
+    }
+
+}

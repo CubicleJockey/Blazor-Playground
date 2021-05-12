@@ -1,11 +1,14 @@
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MsBlazorServerPlayGround.Data;
 using MsBlazorServerPlayGround.Interfaces;
 using MsBlazorServerPlayGround.Objects;
+using MsBlazorServerPlayGround.SignalR.Hubs;
 
 namespace MsBlazorServerPlayGround
 {
@@ -33,30 +36,38 @@ namespace MsBlazorServerPlayGround
             services.AddTransient<JsInAClass>();
 
             services.AddScoped<StateManager>();
+
+            services.AddResponseCompression(options =>
+            {
+                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] {"application/octet-stream"});
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder application, IWebHostEnvironment environment)
         {
-            if (env.IsDevelopment())
+            application.UseResponseCompression();
+
+            if (environment.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                application.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                application.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                application.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            application.UseHttpsRedirection();
+            application.UseStaticFiles();
 
-            app.UseRouting();
+            application.UseRouting();
 
-            app.UseEndpoints(endpoints =>
+            application.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
+                endpoints.MapHub<BotChatHub>("/botChatHub");
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
