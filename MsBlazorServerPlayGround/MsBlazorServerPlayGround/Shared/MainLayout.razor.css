@@ -52,7 +52,7 @@
 
     .sidebar {
         width: 300px;
-        height: 100vh;
+        height: 200vh;
         position: sticky;
         top: 0;
     }

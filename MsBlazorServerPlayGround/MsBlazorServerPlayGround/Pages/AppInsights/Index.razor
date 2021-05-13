@@ -1,0 +1,32 @@
+﻿@page "/AppInsights/Index" 
+@using Microsoft.Extensions.Hosting
+@using Microsoft.ApplicationInsights
+@using Bogus.DataSets
+
+@inject IHostEnvironment Host
+@inject TelemetryClient AppInsights
+
+<h3>App Insights (@Host.EnvironmentName)</h3>
+
+<p><button class="btn btn-outline-primary" @onclick="GenerateError">Generate Error</button></p>
+<p><code>Current Exception</code> @exceptionMessage</p>
+
+@code {
+    private readonly System fakeSystem = new();
+    private string exceptionMessage;
+    
+    private void GenerateError()
+    {
+        try
+        {
+            var exception = fakeSystem.Exception();
+            exceptionMessage = exception.Message;
+
+            throw exception;
+        }
+        catch (Exception exception)
+        {
+            AppInsights.TrackException(exception);
+        }
+    }
+}
