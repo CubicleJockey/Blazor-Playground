@@ -1,0 +1,16 @@
+﻿@page "/Rendering/Index"
+
+@inject NavigationManager NavigationManager
+
+<h3>Rendering Examples</h3>
+
+<p><button class="btn btn-primary" @onclick="NavigateToLongLoad">Long Loading</button></p>
+
+@code {
+
+    private void NavigateToLongLoad()
+    {
+        NavigationManager.NavigateTo("/Rendering/LongLoad");
+    }
+
+}
