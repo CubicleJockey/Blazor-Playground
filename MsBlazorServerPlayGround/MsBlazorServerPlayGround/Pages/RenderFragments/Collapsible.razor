@@ -1,7 +1,7 @@
 ﻿<h3>Collapsible</h3>
 
 <div class="row">
-    <div><span class="oi @(icon)"></span><a @onclick="Toggle" class="col-12">@Text</a></div>
+    <a @onclick="Toggle" class="col-12"><span class="oi @(icon)"></span> @Text</a>
     @if (Collapsed)
     {
         
