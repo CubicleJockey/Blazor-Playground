@@ -1,0 +1,29 @@
+﻿<h3>Collapsible</h3>
+
+<div class="row">
+    <div><span class="oi @(icon)"></span><a @onclick="Toggle" class="col-12">@Text</a></div>
+    @if (Collapsed)
+    {
+        
+        <div class="col-12 card card-body">@ChildContent</div>
+        
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool Collapsed { get; set; }
+
+    private string Text => Collapsed ? "Expand" : "Collapse";
+    private string icon = "oi-caret-right";
+
+    private void Toggle()
+    {
+        Collapsed = !Collapsed;
+        icon = !Collapsed ? "oi-caret-right" : "oi-caret-bottom";
+    }
+}
