@@ -1,0 +1,30 @@
+﻿<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private async Task IncrementCount()
+    {
+        currentCount++;
+
+        var isOdd = currentCount % 2 != 0;
+        if (isOdd)
+        {
+            await OnOdds.InvokeAsync(currentCount);
+        }
+        else
+        {
+            await OnEvens.InvokeAsync(currentCount);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<int> OnOdds { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnEvens { get; set; }
+}

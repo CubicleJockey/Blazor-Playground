@@ -5,14 +5,14 @@
 
 <hr />
 
-<h2>Basic Event Handling (onclick)</h2>
+<h2>Basic Event Handling (<code>@@onclick</code>)</h2>
 
 <p><label><strong>Sentence: </strong>@Sentence</label></p>
 <p><button class="btn btn-primary" @onclick="UpdateSentence">Update heading</button></p>
 
 <hr />
 
-<h2>OnChange Event Handling</h2>
+<h2>Event Handling (<code>@@OnChange</code>)</h2>
 <p><label><input type="checkbox" @onchange="CheckedChanged" /> @checkedMessage</label></p>
 
 <hr />
@@ -31,7 +31,7 @@
 
 <hr />
 
-<h2>Prevent Default Action (onkeydown)</h2>
+<h2>Prevent Default Action (<code>@@onkeydown</code>)</h2>
 <p>
     <label>&plusmn; keys only: </label>
     <input value="@KeyCount" @onkeydown="KeyCountHandler" @onkeydown:preventDefault/>
@@ -39,7 +39,7 @@
 
 <hr />
 
-<h2>Change Focus</h2>
+<h2>Change Focus (<code>ElementReference.FocusAsync</code>)</h2>
 
 <p><input @ref="firstFocusInput" placeholder="Focus First" /></p>
 <p><input @ref="secondFocusInput" placeholder="Focus Second" /></p>

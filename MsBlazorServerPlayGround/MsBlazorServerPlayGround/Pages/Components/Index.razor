@@ -1,0 +1,30 @@
+﻿@page "/Components/index"
+
+@inject NavigationManager NavigationManager
+
+<h3>Component Example</h3>
+
+<CounterModifiedComponent OnOdds="OnOddsValue" OnEvens="OnEvensValue" />
+
+<hr/>
+<br/>
+<p>Last Odd Value: <code>@lastOddValue</code></p>
+<p>Last Even Value: <code>@lastEvenValue</code></p>
+
+
+@code {
+
+    private int lastOddValue;
+    private int lastEvenValue;
+
+
+    private void OnOddsValue(int value)
+    {
+        lastOddValue = value;
+    }
+
+    private void OnEvensValue(int value)
+    {
+        lastEvenValue = value;
+    }
+}
