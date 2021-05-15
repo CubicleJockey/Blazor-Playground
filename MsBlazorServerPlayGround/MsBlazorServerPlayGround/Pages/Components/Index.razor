@@ -12,6 +12,12 @@
 <p>Last Even Value: <code>@lastEvenValue</code></p>
 
 
+<hr/>
+
+<NextFibonacciNumber OnNext="OnNextFibonacciNumber" />
+
+<p>All Previous Numbers: @string.Join(' ', allPrevious)</p>
+
 @code {
 
     private int lastOddValue;
@@ -26,5 +32,11 @@
     private void OnEvensValue(int value)
     {
         lastEvenValue = value;
+    }
+
+    private readonly ICollection<int> allPrevious = new List<int>() {1, 1, 2};
+    private void OnNextFibonacciNumber(int value)
+    {
+        allPrevious.Add(value);
     }
 }

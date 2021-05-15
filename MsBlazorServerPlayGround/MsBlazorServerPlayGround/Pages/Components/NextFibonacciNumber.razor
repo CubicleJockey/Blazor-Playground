@@ -1,0 +1,20 @@
+﻿<h3>Next Fibonacci Number</h3>
+
+<p><button class="btn btn-primary" @onclick="GetNext">Next</button></p>
+<p>Next Fibonacci Number: @next</p>
+
+@code {
+
+    [Parameter]
+    public EventCallback<int> OnNext { get; set; }
+
+    private int previousForCalculationValue = 3;
+    private int next;
+    private async Task GetNext()
+    {
+        next = ((int)(previousForCalculationValue * (1 + Math.Sqrt(5)) / 2.0));
+        previousForCalculationValue = next;
+        
+        await OnNext.InvokeAsync(--next);
+    }
+}
