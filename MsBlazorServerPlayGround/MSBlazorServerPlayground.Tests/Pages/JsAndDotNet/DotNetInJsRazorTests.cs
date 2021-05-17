@@ -42,7 +42,7 @@ namespace MSBlazorServerPlayground.Tests.Pages.JsAndDotNet
                 if(!isNumber) { Assert.Fail("Numbers must be returned."); }
             }
 
-            await Task.CompletedTask;
+            await Task.CompletedTask; 
         }
     }
 }
