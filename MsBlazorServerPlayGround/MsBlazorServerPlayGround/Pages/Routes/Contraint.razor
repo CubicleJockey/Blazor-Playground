@@ -1,0 +1,18 @@
+﻿@page "/Routes/Constraint/{ConstraintValue:int?}"
+
+<h3>Constraining route parameters</h3>
+
+@if (ConstraintValue.HasValue)
+{
+    <p>Constraint Value @ConstraintValue.Value</p>
+
+}
+else
+{
+    <p>Contraint Value was not provided.</p>
+}
+
+@code {
+    [Parameter]
+    public int? ConstraintValue { get; set; }
+}

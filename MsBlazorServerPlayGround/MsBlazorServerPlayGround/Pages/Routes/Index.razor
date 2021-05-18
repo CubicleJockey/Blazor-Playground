@@ -1,5 +1,7 @@
 ﻿@page "/Routes/index"
 
+@inject NavigationManager NavigationManager
+
 <h3>Multiple Routes</h3>
 
 <h6>Multiple routes to same location</h6>
@@ -8,6 +10,45 @@
     <li><NavLink href="/Routes/PathB">/Routes/PathB</NavLink></li>
 </ul>
 
-@code {
+<p>Select a Constraint value to pass via Routing:
+    <select @onchange="OnConstraintValuesChange">
+        <option value="">---Select a value---</option>
+        @foreach (var value in ConstraintValues)
+        {
+            <option value="@value">@value</option>
+        }
+    </select>
+</p>
 
+<p><button class="btn btn-primary" @onclick="NavigateToConstraint">Go to Contraint Route</button></p>
+
+
+@code {
+    private readonly IEnumerable<int> ConstraintValues = Enumerable.Range(0, 100);
+
+    private void NavigateToConstraint()
+    {
+
+        var constrint = string.Empty;
+        if (SelectedConstraintValue.HasValue)
+        {
+            constrint = $"{SelectedConstraintValue}/";
+        }
+        NavigationManager.NavigateTo($"/Routes/Constraint/{SelectedConstraintValue}");
+    }
+
+    public int? SelectedConstraintValue { get; set; }
+
+    private void OnConstraintValuesChange(ChangeEventArgs changeEventArgs)
+    {
+        if (changeEventArgs.Value == default)
+        {
+            SelectedConstraintValue = null;
+            return;
+        }
+        if (int.TryParse(changeEventArgs.Value.ToString(), out var value))
+        {
+            SelectedConstraintValue = value;
+        }
+    }
 }
