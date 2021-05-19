@@ -1,11 +1,19 @@
 ﻿@page "/RenderFragments/index"
 
+@inject NavigationManager NavigationManager
+
 <h3>Render Fragment Examples</h3>
 
 <p>Render a child content in component!</p>
 <Collapsible>I am the child content that is render with <code>RenderFragment</code></Collapsible>
 
+<br/><br/>
+<p><button class="btn btn-primary" @onclick="NavigateToTabControl">Tab Control Sample</button></p>
 
 @code {
 
+    private void NavigateToTabControl()
+    {
+        NavigationManager.NavigateTo("/RenderFragments/TabControl/tab-control-sample");
+    }
 }
