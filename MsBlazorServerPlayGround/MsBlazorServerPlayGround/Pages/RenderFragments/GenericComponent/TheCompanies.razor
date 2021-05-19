@@ -1,0 +1,32 @@
+﻿@using Bogus.DataSets
+@using MsBlazorServerPlayGround.Models
+<GenericList Items="@Companies"/>
+
+@code {
+
+    private Company company;
+    private Address address;
+
+    private IEnumerable<TheCompany> Companies;
+
+    protected override Task OnInitializedAsync()
+    {
+        company = new();
+        address = new();
+
+        Companies = new []
+        {
+            new TheCompany
+            {
+                 Name =company.CompanyName()
+                ,Address = address.StreetAddress()
+                ,City = address.City()
+                ,State = address.State()
+                ,Zip = address.ZipCode()
+            }
+        };
+
+        return base.OnInitializedAsync();
+    }
+
+}
