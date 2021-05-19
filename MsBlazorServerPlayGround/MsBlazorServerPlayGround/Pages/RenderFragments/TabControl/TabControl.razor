@@ -2,11 +2,19 @@
     <div class="btn-group" role="group">
         @foreach (var tabPage in Pages)
         {
-            <button type="button"
-                    class="btn @GetButtonClass(tabPage)"
-                    @onclick=@(() => ActivatePage(tabPage))>
+        <button type="button"
+                class="btn @GetButtonClass(tabPage)"
+                @onclick=@(() => ActivatePage(tabPage))>
+
+            @if (TabTextTemplate != default)
+            {
+                @TabTextTemplate(tabPage)
+            }
+            else
+            {
                 @tabPage.Text
-            </button>
+            }
+        </button>
         }
     </div>
     @ChildContent
@@ -20,6 +28,9 @@
     
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment<TabPage> TabTextTemplate { get; set; }
 
 
     private string GetButtonClass(TabPage page)
