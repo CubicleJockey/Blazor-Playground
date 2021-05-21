@@ -9,11 +9,17 @@
 
 <br/><br/>
 <p><button class="btn btn-primary" @onclick="NavigateToTabControl">Tab Control Sample</button></p>
+<p><button class="btn btn-primary" @onclick="NavigateToGenericList">Generic List Example</button></p>
 
 @code {
 
     private void NavigateToTabControl()
     {
         NavigationManager.NavigateTo("/RenderFragments/TabControl/tab-control-sample");
+    }
+
+    private void NavigateToGenericList()
+    {
+        NavigationManager.NavigateTo("/RenderFragments/GenericComponent/generic-list-sample");
     }
 }

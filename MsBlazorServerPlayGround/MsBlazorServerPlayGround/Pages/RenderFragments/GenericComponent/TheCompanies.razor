@@ -1,6 +1,10 @@
-﻿@using Bogus.DataSets
+﻿@page "/RenderFragments/GenericComponent/generic-list-sample"
+
+@using Bogus.DataSets
 @using MsBlazorServerPlayGround.Models
-<GenericList Items="@Companies"/>
+<GenericList Items=@Companies>
+    @context.Name @context.Address @context.City, @context.State @context.Zip
+</GenericList>
 
 @code {
 
@@ -19,6 +23,38 @@
             new TheCompany
             {
                  Name =company.CompanyName()
+                ,Address = address.StreetAddress()
+                ,City = address.City()
+                ,State = address.State()
+                ,Zip = address.ZipCode()
+            }
+            ,new TheCompany
+            {
+                Name =company.CompanyName()
+                ,Address = address.StreetAddress()
+                ,City = address.City()
+                ,State = address.State()
+                ,Zip = address.ZipCode()
+            }
+            ,new TheCompany
+            {
+                Name =company.CompanyName()
+                ,Address = address.StreetAddress()
+                ,City = address.City()
+                ,State = address.State()
+                ,Zip = address.ZipCode()
+            }
+            ,new TheCompany
+            {
+                Name =company.CompanyName()
+                ,Address = address.StreetAddress()
+                ,City = address.City()
+                ,State = address.State()
+                ,Zip = address.ZipCode()
+            }
+            ,new TheCompany
+            {
+                Name =company.CompanyName()
                 ,Address = address.StreetAddress()
                 ,City = address.City()
                 ,State = address.State()
