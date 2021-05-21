@@ -20,7 +20,8 @@
     </select>
 </p>
 
-<p><button class="btn btn-primary" @onclick="NavigateToConstraint">Go to Contraint Route</button></p>
+<p><button class="btn btn-primary" @onclick="NavigateToConstraint">Go to Constraint Route</button></p>
+<p><button class="btn btn-primary" @onclick="NavigateToLocationChanged">Go to Location Changed</button></p>
 
 
 @code {
@@ -29,12 +30,17 @@
     private void NavigateToConstraint()
     {
 
-        var constrint = string.Empty;
+        var constraint = string.Empty;
         if (SelectedConstraintValue.HasValue)
         {
-            constrint = $"{SelectedConstraintValue}/";
+            constraint = $"{SelectedConstraintValue}/";
         }
         NavigationManager.NavigateTo($"/Routes/Constraint/{SelectedConstraintValue}");
+    }
+
+    private void NavigateToLocationChanged()
+    {
+        NavigationManager.NavigateTo("/Routes/location-changed");
     }
 
     public int? SelectedConstraintValue { get; set; }

@@ -1,0 +1,36 @@
+﻿@page "/Routes/location-changed"
+
+@using static System.Diagnostics.Debug;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject NavigationManager NavigationManager
+@inject ProtectedSessionStorage SessionStorage
+@implements IDisposable
+
+
+<h3>Location Changed</h3>
+<p>Press the button</p>
+
+<p><button class="btn btn-primary" @onclick="@(() => NavigationManager.NavigateTo("/"))">Navigate Home</button></p>
+
+@code {
+    
+    protected override Task OnInitializedAsync()
+    {
+        NavigationManager.LocationChanged += LocationChangedEvent;
+        return base.OnInitializedAsync();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= LocationChangedEvent;
+    }
+
+    private void LocationChangedEvent(object sender, LocationChangedEventArgs locationChangedEvent)
+    {
+        var navigationMethod = locationChangedEvent.IsNavigationIntercepted ? "HTML" : "Code";
+
+        var message = $"Navigation occurred via {navigationMethod} to {locationChangedEvent.Location}.";
+        WriteLine(message);
+        SessionStorage.SetAsync("LocationChangedEvent", message);
+    }
+}
