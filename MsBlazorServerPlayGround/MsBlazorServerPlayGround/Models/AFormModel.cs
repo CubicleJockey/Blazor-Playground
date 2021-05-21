@@ -26,6 +26,6 @@ namespace MsBlazorServerPlayGround.Models
         public int Stars { get; set; }
 
         [Required]
-        public DateTime SubmissionDate { get; set; }
+        public DateTime SubmissionDate { get; set; } = DateTime.Now;
     }
 }

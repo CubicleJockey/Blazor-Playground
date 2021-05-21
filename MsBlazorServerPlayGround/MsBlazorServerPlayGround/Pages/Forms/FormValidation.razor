@@ -1,6 +1,6 @@
 ﻿@page "/form-validation"
 @using MsBlazorServerPlayGround.Models
-@using Microsoft.AspNetCore.Mvc.ModelBinding
+@using System.Text
 
 <h3>Form Validation Basic</h3>
 
@@ -44,24 +44,20 @@
     </div>
     <div class="form-group">
         <label for="submission-date">Submit Date:</label>
-        <InputDate @bind-Value="model.SubmissionDate" id="submission-date" class="form-control"></InputDate>
+        <InputDate @bind-Value="model.SubmissionDate" id="submission-date" class="form-control" ParsingErrorMessage="Must be a date."></InputDate>
     </div>
 
     <button class="btn btn-info" type="submit">Submit</button>
 </EditForm>
 
+<div style="padding: 15px 5px 0px 5px;">
+    <p><code>Form Submit Status:</code> @submitMessage</p>
+</div>
 
 
 @code {
+    private string submitMessage;
     private readonly AFormModel model = new();
-    
-    private void HandleValidSubmit()
-    {
-       
-    }
-
-    private void HandleInvalidSubmit()
-    {
-
-    }
+    private void HandleValidSubmit() => submitMessage = "Form is Valid!";
+    private void HandleInvalidSubmit() => submitMessage = "Form is invalid!";
 }
