@@ -1,0 +1,22 @@
+﻿@page "/Forms/Index"
+
+@inject NavigationManager NavigationManager
+
+<h3>Forms</h3>
+
+<p><button class="btn btn-primary" @onclick="NavigateToFormValidation">Form Validation</button></p>
+<p><button class="btn btn-primary" @onclick="NavigateToAccessFormState">Access Form State</button></p>
+
+@code {
+
+    private void NavigateToFormValidation()
+    {
+        NavigationManager.NavigateTo("/Forms/form-validation");
+    }
+
+    private void NavigateToAccessFormState()
+    {
+        NavigationManager.NavigateTo("/Forms/state-access");
+    }
+
+}
