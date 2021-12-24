@@ -6,10 +6,10 @@
 <hr />
 
 <h2>Binding to Field &amp; Property</h2>
-<p>Field Binding: <input @bind="textInputField" /></p>
+<p>Field Binding: <input @bind="TextInputField" /></p>
 <p>Property Binding: <input @bind="TextInputProperty" /></p>
 <ul>
-    <li><code>@nameof(textInputField)</code>: @textInputField</li>
+    <li><code>@nameof(TextInputField)</code>: @TextInputField</li>
     <li><code>@nameof(TextInputProperty)</code>: @TextInputProperty</li>
 </ul>
 
@@ -54,7 +54,7 @@
 <hr/>
 
 @code {
-    private string textInputField;
+    private string TextInputField;
     private string TextInputProperty { get; set; }
     private string BindEventInput { get; set; }
     private int Unparsable = 12345;
