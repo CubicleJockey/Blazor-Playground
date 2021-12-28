@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 
 using static System.Console;
+using Azure.Identity;
 
 namespace MsBlazorServerPlayGround
 {

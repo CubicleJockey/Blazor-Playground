@@ -22,7 +22,7 @@ namespace MsBlazorServerPlayGround.Objects
         public ValueTask<string> GetRandomNumberList()
         {
             var max = random.Next(0, 50);
-            IList<int> numbers = new List<int>(max);
+            ICollection<int> numbers = new List<int>(max);
             for(var i = 0; i < max; i++)
             {
                 numbers.Add(random.Next(0, max));

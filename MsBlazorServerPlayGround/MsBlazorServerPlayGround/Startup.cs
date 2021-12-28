@@ -43,6 +43,7 @@ namespace MsBlazorServerPlayGround
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] {"application/octet-stream"});
             });
             services.AddApplicationInsightsTelemetry();
+            services.AddAzureAppConfiguration();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +73,7 @@ namespace MsBlazorServerPlayGround
                 endpoints.MapHub<BotChatHub>("/botChatHub");
                 endpoints.MapFallbackToPage("/_Host");
             });
+            application.UseAzureAppConfiguration();
         }
     }
 }

@@ -2,6 +2,10 @@
   "dependencies": {
     "appInsights": {
       "type": "appInsights"
+    },
+    "appConfig1": {
+      "type": "appConfig",
+      "connectionId": "AppConfig"
     }
   }
 }
